@@ -2,9 +2,7 @@ class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
         int len1 = ransomNote.length();
         int len2 = magazine.length();
-        if(len1 > len2){
-            return false;
-        } 
+        
         char[] arr1 = ransomNote.toCharArray();
         char[] arr2 = magazine.toCharArray();
         for(int i=0; i<len1; i++){
