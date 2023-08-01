@@ -1,31 +1,22 @@
 class Solution {
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> list = new ArrayList<>();
-        int[] arr = new int[n];
-        int j=0;
-        for(int i=1; i<=n; i++){
-            arr[j++] = i;
-        }
-        List<List<Integer>> ss = subset(arr);
-        for(List<Integer> temp : ss){
-            if(temp.size() == k){
-                list.add(temp);
-            }
-        }
+        subset(n, 1, k, new ArrayList<>(), list);
         return list;
     }
     
-    public static List<List<Integer>> subset(int[] arr){
-        List<List<Integer>> outer = new ArrayList<>();
-        outer.add(new ArrayList<>());
-        for(int num : arr){
-            int n = outer.size();
-            for (int i = 0; i < n; i++) {
-                List<Integer> internal = new ArrayList<>(outer.get(i));
-                internal.add(num);
-                outer.add(internal);
-            }
+    public static void subset(int n, int start, int k, List<Integer> comb, List<List<Integer>> list){
+        if(comb.size() == k){
+            List<Integer> temp = new ArrayList<>(comb);
+            list.add(temp);
+            return;
         }
-        return outer;
+        for(int i=start; i<=n; i++){
+            comb.add(i);
+            subset(n, i+1, k, comb, list);
+            comb.remove(comb.size()-1);
+        }
     }
+
+    
 }
