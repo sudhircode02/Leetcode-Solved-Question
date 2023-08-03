@@ -1,8 +1,7 @@
 class Solution {
     public List<String> letterCombinations(String digits) {
         if(digits.isEmpty()){
-            List<String> list = new ArrayList<>();
-            return list;
+            return new ArrayList<String>();
         }
         return combination("",digits);
     }
