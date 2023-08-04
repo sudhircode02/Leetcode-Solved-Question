@@ -3,11 +3,13 @@ class Solution {
        if (n == 0) 
             return 1.0;
 
+        double halfPow = myPow(x, n/2);
+        double halfPowSqr = halfPow * halfPow;
         if (n % 2 == 1) 
-            return x * myPow(x, n - 1);
+            return x * halfPowSqr;
 
         if (n % 2 == 0) 
-            return myPow(x * x, n / 2);
+            return halfPowSqr;
 
         return 1 / myPow(x, -n);
     }
