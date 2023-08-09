@@ -33,15 +33,15 @@ class Solution{
     }
     
     static boolean isAsc(int n){
-        int len = (int)(Math.log10(n)+1);
-        int[] temp = new int[len];
+        
+        int temp = 10;
         int j=0;
         while(n>0){
-            temp[j++] = n%10;
+            int ld = n%10;
             n /= 10;
-        }
-        for(int i=1; i<len; i++){
-            if(temp[i] > temp[i-1]){
+            if(temp >= ld){
+                temp = ld;    
+            }else{
                 return false;
             }
         }
