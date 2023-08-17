@@ -2,17 +2,16 @@ class Solution {
     public int[][] updateMatrix(int[][] mat) {
         int m = mat.length;
         int n = mat[0].length;
-        int[][] ans = new int[m][n];
         for(int i=0; i<m; i++){
             for(int j=0; j<n; j++){
                 int bit = mat[i][j];
                 if(bit != 0){
                     int nearZeroBit = findNearestZero(i, j, mat);
-                    ans[i][j] = nearZeroBit;
+                    mat[i][j] = nearZeroBit;
                 }
             }
         }
-        return ans;
+        return mat;
     }
 
     public int findNearestZero(int r, int c, int[][] mat){
