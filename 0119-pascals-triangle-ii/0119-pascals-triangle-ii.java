@@ -19,6 +19,6 @@ class Solution {
             }
             list.add(temp);
         }
-        return list.get(list.size()-1);
+        return list.get(rowIndex);
     }
 }
