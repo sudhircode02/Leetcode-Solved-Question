@@ -1,25 +1,12 @@
 class Solution {
-    public boolean isSubsequence(String s, String t) {
+    public boolean isSubsequence(String s, String t) {           
         if(s.isEmpty()) return true;
-        char[] sArr = s.toCharArray();
-        char[] tArr = t.toCharArray();
         int j=0;
-        for(int i=0; i< sArr.length; i++){
-            boolean isFound = false;
-            while(j< tArr.length){
-                if(i == sArr.length-1 && sArr[i] == tArr[j]){
-                   return true;
-                }
-                if(sArr[i] == tArr[j]){
-                   isFound = true;
-                   j++;
-                   break;
-                }
+        for(int i=0; i<t.length(); i++){
+            if(t.charAt(i) == s.charAt(j)){
                 j++;
             }
-            if(!isFound){
-              return false;
-            }
+            if(j==s.length()) return true;
         }
         return false;
     }
