@@ -1,47 +1,45 @@
 //{ Driver Code Starts
+//Initial Template for Java
+
 import java.util.*;
 import java.lang.*;
+import java.math.*;
 import java.io.*;
-class GFG
-{
-    public static void main(String[] args) throws IOException
-    {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int T = Integer.parseInt(br.readLine().trim());
-        while(T-->0)
-        {
-            String[] S = br.readLine().trim().split(" ");
-            int n = Integer.parseInt(S[0]);
-            int m = Integer.parseInt(S[1]);
-            char [][] board = new char[n][m];
-            for(int i = 0; i < n; i++){
-                String[] s = br.readLine().trim().split(" ");
-                for(int j = 0; j < m; j++){
-                    board[i][j] = s[j].charAt(0);
-                }
-            }
-            String word = br.readLine().trim();
-            Solution obj = new Solution();
-            boolean ans = obj.isWordExist(board, word);
-            if(ans)
-                System.out.println("1");
-            else
-                System.out.println("0");
-       }
+
+class GFG {
+  public static void main(String[] args) throws IOException {
+    Scanner sc = new Scanner(System.in);
+    int T = sc.nextInt();
+    while (T-- > 0) {
+      int n = sc.nextInt();
+      int m = sc.nextInt();
+      char a[][] = new char[n][m];
+      sc.nextLine();
+      for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++)
+         a[i][j]=sc.next().charAt(0);
+      }
+      String word=sc.next();
+      Solution obj = new Solution();
+      int ans = obj.wordSearch(a,word) ? 1 : 0;
+      System.out.println(ans);
     }
+  }
 }
+
 // } Driver Code Ends
 
 
-class Solution
-{
-    public boolean isWordExist(char[][] board, String word)
-    {
-        // Code here
+//User function Template for Java
+
+class Solution {
+  public static boolean wordSearch(char board[][],String word) {
+    // code here
         for(int i=0; i<board.length; i++){
             for(int j=0; j<board[0].length; j++){
-                if(board[i][j] == word.charAt(0)){
-                    if(search(i, j, board, word, 0)){
+                char ch = word.charAt(0);
+                if(board[i][j] == ch){
+                    if(helper(i, j, board, word, 1)){
                         return true;
                     }
                 }
@@ -50,32 +48,32 @@ class Solution
         return false;
     }
 
-
-    static boolean search(int r, int c, char[][] board, String word, int k){
-        if(k == word.length()-1){
+    private static boolean helper(int r, int c, char[][] board, String word, int count){
+        if(count == word.length()){
             return true;
         }
-        char nextChar = word.charAt(k+1);
-        char temp = board[r][c];
+        char currChar = board[r][c];
         board[r][c] = '!';
-        //left
-        if(c>0 && board[r][c-1]==nextChar){
-            if(search(r, c-1, board, word, k+1)) return true;
-        }
-        //right
-        if(c<board[0].length-1 && board[r][c+1]==nextChar){
-            if(search(r, c+1, board, word, k+1)) return true;
-        }
+        char nextChar = word.charAt(count);
+
         //up
-        if(r>0 && board[r-1][c]==nextChar){
-            if(search(r-1, c, board, word, k+1)) return true;
+        if(r>0 && board[r-1][c] == nextChar){
+            if(helper(r-1, c, board, word, count+1)) return true;
         }
         //down
-        if(r<board.length-1 && board[r+1][c]==nextChar){
-            if(search(r+1, c, board, word, k+1)) return true;
+        if(r<board.length-1 && board[r+1][c] == nextChar){
+            if(helper(r+1, c, board, word, count+1)) return true;
         }
-        board[r][c] = temp;
-
+        //left
+        if(c>0 && board[r][c-1] == nextChar){
+            if(helper(r, c-1, board, word, count+1)) return true;
+        }
+        //right
+        if(c<board[0].length-1 && board[r][c+1] == nextChar){
+            if(helper(r, c+1, board, word, count+1)) return true;
+        }
+        board[r][c] = currChar;
         return false;
     }
 }
+     
